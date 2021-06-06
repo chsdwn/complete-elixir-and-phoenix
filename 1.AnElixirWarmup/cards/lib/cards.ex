@@ -1,5 +1,4 @@
 defmodule Cards do
-
   def create_deck do
     values = ["Ace", "Two", "Three", "Four", "Five"]
     suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
@@ -27,12 +26,10 @@ defmodule Cards do
     File.write(filename, binary)
   end
 
-  def load(filename) do
-    { status, binary } = File.read filename
-
-    case status do
-      :ok -> :erlang.binary_to_term binary
-      :error -> "File does not exist"
+  def load filename do
+    case File.read filename do
+      { :ok, binary } -> :erlang.binary_to_term binary
+      { :error, _reason } -> "File does not exist"
     end
   end
 end

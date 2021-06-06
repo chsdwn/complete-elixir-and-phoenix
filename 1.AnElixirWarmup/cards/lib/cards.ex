@@ -21,4 +21,9 @@ defmodule Cards do
     { hand, _deck } = Enum.split deck, hand_size
     hand
   end
+
+  def save(deck, filename) do
+    binary = :erlang.term_to_binary(deck)
+    File.write(filename, binary)
+  end
 end
